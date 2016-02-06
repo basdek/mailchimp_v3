@@ -1,7 +1,7 @@
 # mailchimp_v3
 
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis](https://travis-ci.org/basdek/mailchimp_v3)
+[![Build Status][ico-travis]](https://travis-ci.org/basdek/mailchimp_v3)
 
 A Scala (Java compatible) implementation of the MailChimp api, version 3.
 
