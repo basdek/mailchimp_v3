@@ -1,6 +1,5 @@
-package com.basdek.mailchimp_v3.operations
+package com.basdek.mailchimp_v3
 
-import com.basdek.mailchimp_v3.Config
 import dispatch.Req
 
 /**

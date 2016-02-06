@@ -1,7 +1,7 @@
 package com.basdek.mailchimp_v3.operations
 
 import com.basdek.mailchimp_v3.dto.GenericMailChimpSuccessHolder
-import com.basdek.mailchimp_v3.{MailChimpResultFuture, Config}
+import com.basdek.mailchimp_v3.{SimpleAuthenticate, MailChimpResultFuture, Config}
 import dispatch.:/
 
 /**
