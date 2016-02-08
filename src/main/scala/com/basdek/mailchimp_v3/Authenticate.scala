@@ -17,5 +17,5 @@ trait SimpleAuthenticate extends Authenticate {
     * @param in The dispatch Req.
     * @return The altered Req, with basic auth.
     */
-  def addAuth(in : Req) : Req = in.as(user, cfg.apiKey)
+  def addAuth(in : Req) : Req = in.as_!(user, cfg.apiKey)
 }

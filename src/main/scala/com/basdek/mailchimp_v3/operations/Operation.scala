@@ -40,7 +40,7 @@ trait Operation {
     Http(req).map {
       (res : Response) => res.getStatusCode match {
         case 200 => Right(transformer.apply(res))
-        case _ => Left(parse(res.getResponseBody()).extract[MailChimpError])
+        case _ => Left(parse(res.getResponseBody()).extract[MailChimpError]) //@TODO: reporting, logging, etc.
       }
     }
   }

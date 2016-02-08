@@ -10,7 +10,7 @@ case class MailChimpError(status: Int, _type : String,
     * Computes a friendly representation of the error.
     * @return The friendly rep.
     */
-  override def toString : String = s"Code: $status, $title ($detail)."
+  override def toString : String = s"Code: $status, $title: $detail"
 }
 
 object MailChimpError {

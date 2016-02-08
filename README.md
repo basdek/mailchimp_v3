@@ -12,6 +12,8 @@ Currently not available in a distributed manner via either maven or sbt.
 
 In development, certainly not production ready yet.
 
+**Requires a JDK of version 8 or above (because of external dependencies).**
+
 ### Usage
 
 The usage of the library is fairly simple:
@@ -63,8 +65,11 @@ owners.
     * Execute the operations and enjoy your MailChimp communication.
     * For tests
         * ENV-var based API contact (for integration tests)
-
 * Implemented a credential testing operation
+* Implemented the ```/lists``` operation (currently ignoring the modules field.)
+* Implemented the ```/list/{list_id}``` operation (in the same manner as
+mentioned for ```/lists```)
+
 
 
 

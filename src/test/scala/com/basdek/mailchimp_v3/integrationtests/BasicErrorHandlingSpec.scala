@@ -5,7 +5,6 @@ import com.basdek.mailchimp_v3.{MailChimpResultFuture, Config}
 import com.basdek.mailchimp_v3.helpers.ConfigLoader
 import org.scalatest.{FlatSpec, Matchers}
 import scala.concurrent.Await
-import scala.concurrent.duration._
 
 class BasicErrorHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
 
@@ -15,7 +14,7 @@ class BasicErrorHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
     val operation = new AuthTestOperation(cfg)
     val resultFuture : MailChimpResultFuture = operation.execute
 
-    val result = Await.result(resultFuture, 2 seconds)
+    val result = Await.result(resultFuture, timeout)
 
     result.isLeft should equal(true)
     result.left.get.status should not equal(200)

@@ -18,19 +18,20 @@ trait ConfigLoader {
     * Returns the api endpoint.
     * @return The url for the api endpoint.
     */
-  def apiEndpoint : String = conf.getString("mailchimp.api_endpoint")
+  val apiEndpoint : String = conf.getString("mailchimp.api_endpoint")
 
 
   /**
     * Returns the api key.
     * @return An api key.
     */
-  def apiKey : String = conf.getString("mailchimp.api_key")
+  val apiKey : String = conf.getString("mailchimp.api_key")
 
   /**
     * Creates a default Config (loading the ENV vars).
     * @return A Config instance.
     */
-  def defaultCfg : Config = new Config(this.apiEndpoint, this.apiKey)
+  def defaultCfg : Config =
+    new Config(apiKey = this.apiKey, apiEndpoint = this.apiEndpoint)
 
 }
