@@ -16,41 +16,42 @@ sealed case class MailChimpList_Stats
    click_rate: Int
   )
 
-sealed case class MailChimpList_Contact
+case class MailChimpList_Contact
   (company : String,
    address1: String,
-   address2 : String,
+   address2 : NonRequiredField[String],
    city: String,
    state: String,
    zip : String,
    country: String,
-   phone : String)
+   phone : NonRequiredField[String])
 
-sealed case class MailChimpList_CampaignDefaults
+case class MailChimpList_CampaignDefaults
   (from_name : String,
    from_email : String,
    subject : String,
    language: String)
 
 case class MailChimpList
-  (id : String,
+  (id : ReadOnlyField[String] = None,
    name : String,
    contact : MailChimpList_Contact,
    permission_reminder : String,
    use_archive_bar : Boolean,
    campaign_defaults : MailChimpList_CampaignDefaults,
-   notify_on_subscribe : String,
-   notify_on_unsubscribe : String,
-   date_created : String,
-   list_rating: Int,
+   notify_on_subscribe : NonRequiredField[String],
+   notify_on_unsubscribe : NonRequiredField[String],
+   date_created : ReadOnlyField[String] = None,
+   list_rating: ReadOnlyField[Int] = None,
    email_type_option: Boolean,
-   subscribe_url_short : String,
-   subscribe_url_long: String,
-   beamer_address : String,
-   visibility : String,
-   stats: MailChimpList_Stats
+   subscribe_url_short : ReadOnlyField[String] = None,
+   subscribe_url_long: ReadOnlyField[String] = None,
+   beamer_address : ReadOnlyField[String] = None,
+   visibility : NonRequiredField[String] = None,
+   stats: ReadOnlyField[MailChimpList_Stats] = None
   ) extends MailChimpSuccess
 
 case class MailChimpListList
   (lists : List[MailChimpList],
-   total_items: Int) extends MailChimpSuccess
+   total_items: Int
+  ) extends MailChimpSuccess

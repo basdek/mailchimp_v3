@@ -17,8 +17,10 @@ In development, certainly not production ready yet.
 ### Usage
 
 The usage of the library is fairly simple:
+
 1. Instantiate a Config object with an api key and your endpoint
-```https://usX.api.mailchimp.com/v3``` (please note: NO trailing slash.)
+    ```usX.api.mailchimp.com/v3``` (please note: NO trailing slash;
+    NO protocol specification please.)
 2. Pass the Config object to any operations you want to execute. Enjoy.
 
 ## Testing
@@ -66,9 +68,10 @@ owners.
     * For tests
         * ENV-var based API contact (for integration tests)
 * Implemented a credential testing operation
-* Implemented the ```/lists``` operation (currently ignoring the modules field.)
-* Implemented the ```/list/{list_id}``` operation (in the same manner as
+* Implemented the ```GET /lists``` operation (currently ignoring the modules field.)
+* Implemented the ```GET /list/{list_id}``` operation (in the same manner as
 mentioned for ```/lists```)
+* Implemented the ```POST /lists``` operation
 
 
 

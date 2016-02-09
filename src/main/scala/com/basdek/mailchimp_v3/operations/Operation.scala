@@ -3,6 +3,7 @@ package com.basdek.mailchimp_v3.operations
 import com.basdek.mailchimp_v3.dto.{MailChimpSuccess, MailChimpError}
 import com.basdek.mailchimp_v3.{Config, MailChimpResultFuture}
 import com.ning.http.client.Response
+import com.typesafe.scalalogging.LazyLogging
 import dispatch._, Defaults._
 import org.json4s._
 import org.json4s.native.JsonMethods._
@@ -12,7 +13,7 @@ import org.json4s.native.JsonMethods._
   * This is a basic Operation with some utilities / generalized stuff for an
   * operation on the MailChimp api.
   */
-trait Operation {
+trait Operation extends LazyLogging {
 
   def execute : MailChimpResultFuture
 
@@ -35,12 +36,16 @@ trait Operation {
     * @tparam A The type where transformer => A (must extend MailChimpSuccess).
     * @return A MailChimpResultFuture (with either the transformation or error).
     */
-  def httpToResult[A <: MailChimpSuccess]
+  final def httpToResult[A <: MailChimpSuccess]
   (req: Req, transformer : (Response) => A) : MailChimpResultFuture = {
     Http(req).map {
       (res : Response) => res.getStatusCode match {
         case 200 => Right(transformer.apply(res))
-        case _ => Left(parse(res.getResponseBody()).extract[MailChimpError]) //@TODO: reporting, logging, etc.
+        case _ =>
+          val respBody = res.getResponseBody
+          val error = parse(res.getResponseBody()).extract[MailChimpError]
+          logger.error(s"A MailChimp error occurred. \n ${error.toString}")
+          Left(error)
       }
     }
   }

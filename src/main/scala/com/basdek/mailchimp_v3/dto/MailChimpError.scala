@@ -3,8 +3,15 @@ package com.basdek.mailchimp_v3.dto
 import org.json4s.FieldSerializer
 import org.json4s.FieldSerializer._
 
-case class MailChimpError(status: Int, _type : String,
-  title : String, detail : String, instance : String) {
+sealed case class Error(field : String, message : String)
+
+case class MailChimpError(
+  status: Int,
+  _type : String,
+  title : String,
+  detail : String,
+  instance : String,
+  errors: Option[List[Error]]) {
 
   /**
     * Computes a friendly representation of the error.
