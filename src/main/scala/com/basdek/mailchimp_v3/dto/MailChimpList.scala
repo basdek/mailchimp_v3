@@ -47,7 +47,7 @@ case class MailChimpList
    subscribe_url_short : ReadOnlyField[String] = None,
    subscribe_url_long: ReadOnlyField[String] = None,
    beamer_address : ReadOnlyField[String] = None,
-   visibility : NonRequiredField[String] = None,
+   visibility : NonRequiredField[String] = None, //@TODO: stricten up
    stats: ReadOnlyField[MailChimpList_Stats] = None
   ) extends MailChimpSuccess
 
