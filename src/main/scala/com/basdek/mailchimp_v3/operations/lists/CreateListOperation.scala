@@ -7,6 +7,11 @@ import com.ning.http.client.Response
 import dispatch._, Defaults._
 import org.json4s._, native.JsonMethods._, native.Serialization.{write => jsonWrite}
 
+/**
+  * Implementation of the POST /lists operation.
+  * @param cfg A Config instance.
+  * @param data A list DTO object.
+  */
 class CreateListOperation(val cfg: Config, val data : MailChimpList)
   extends Operation with SimpleAuthenticate {
 

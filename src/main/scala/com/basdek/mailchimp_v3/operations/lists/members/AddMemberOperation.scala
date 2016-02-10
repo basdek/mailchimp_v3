@@ -7,6 +7,12 @@ import com.ning.http.client.Response
 import dispatch._, Defaults._
 import org.json4s._, native.JsonMethods._, native.Serialization.{write => jsonWrite}
 
+/**
+  * Implementation of the POST /lists/{listId}/members command
+  * @param cfg A Config instance.
+  * @param listId The id of the list the member needs to be added to.
+  * @param data A MailChimpMember DTO object.
+  */
 class AddMemberOperation(val cfg: Config, listId: String, data: MailChimpMember)
   extends Operation with SimpleAuthenticate {
 

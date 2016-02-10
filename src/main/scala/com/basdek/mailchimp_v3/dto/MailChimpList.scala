@@ -13,8 +13,7 @@ sealed case class MailChimpList_Stats
    avg_unsub_rate: Int,
    target_sub_rate: Int,
    open_rate: Int,
-   click_rate: Int
-  )
+   click_rate: Int)
 
 case class MailChimpList_Contact
   (company : String,
