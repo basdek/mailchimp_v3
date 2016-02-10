@@ -72,7 +72,8 @@ owners.
 * Implemented the ```GET /list/{list_id}``` operation (in the same manner as
 mentioned for ```/lists```)
 * Implemented the ```POST /lists``` operation
-
+* Implemented the ```GET /lists/{list_id}/members``` operation
+* Implemented the ```POST /lists/{list_id}/members``` operation
 
 
 

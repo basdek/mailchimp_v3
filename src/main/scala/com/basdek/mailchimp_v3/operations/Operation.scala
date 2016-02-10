@@ -44,7 +44,7 @@ trait Operation extends LazyLogging {
         case _ =>
           val respBody = res.getResponseBody
           val error = parse(res.getResponseBody()).extract[MailChimpError]
-          logger.error(s"A MailChimp error occurred. \n ${error.toString}")
+          logger.error(s"A MailChimp error occurred.\n${error.toString}")
           Left(error)
       }
     }
