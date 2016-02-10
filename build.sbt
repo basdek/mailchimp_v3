@@ -13,6 +13,7 @@ libraryDependencies += "org.json4s" %% "json4s-native" % "3.3.0"
 
 //Logging.
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.9" % "test"
 
 //Testing.
 libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"

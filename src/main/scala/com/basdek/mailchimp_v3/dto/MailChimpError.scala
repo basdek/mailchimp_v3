@@ -3,7 +3,9 @@ package com.basdek.mailchimp_v3.dto
 import org.json4s.FieldSerializer
 import org.json4s.FieldSerializer._
 
-sealed case class Error(field : String, message : String)
+sealed case class Error(field : String, message : String) {
+  override def toString : String = s"[Error detail: $field] $message"
+}
 
 case class MailChimpError(
   status: Int,
@@ -17,7 +19,15 @@ case class MailChimpError(
     * Computes a friendly representation of the error.
     * @return The friendly rep.
     */
-  override def toString : String = s"Code: $status, $title: $detail"
+  override def toString : String = {
+
+    //If we have detail msgs, make a nice string for them.
+    val errorsStr = errors
+      .map(e => e.toString)
+      .foldLeft("") ((x: String, m: String) => m + x + "\n")
+
+    s"Code: $status, $title: $detail $errorsStr"
+  }
 }
 
 object MailChimpError {

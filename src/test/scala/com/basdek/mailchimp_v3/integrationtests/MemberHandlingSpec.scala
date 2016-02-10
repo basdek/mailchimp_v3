@@ -1,5 +1,7 @@
 package com.basdek.mailchimp_v3.integrationtests
 
+import java.util.UUID
+
 import com.basdek.mailchimp_v3.MailChimpResultFuture
 import com.basdek.mailchimp_v3.dto.{MailChimpMember, MailChimpMemberList}
 import com.basdek.mailchimp_v3.helpers.ConfigLoader
@@ -27,7 +29,7 @@ class MemberHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
   "AddMemberOperation" should "add a member to a list" in {
     val cfg = defaultCfg
     val data = MailChimpMember(
-      email_address = "albus.dumbledore@basdek.com",
+      email_address = s"albus.dumbledore${UUID.randomUUID}@basdek.com",
       status = "subscribed",
       merge_fields = None,
       interests = None,

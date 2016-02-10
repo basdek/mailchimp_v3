@@ -7,6 +7,11 @@ import com.ning.http.client.Response
 import dispatch._, Defaults._
 import org.json4s._, native.JsonMethods._
 
+/**
+  * Implementation of the /lists/{listId}/members operation
+  * @param cfg A Config instance.
+  * @param listId The id of the list to get the members from.
+  */
 class GetMembersOperation(val cfg: Config, val listId : String)
   extends Operation with SimpleAuthenticate {
 

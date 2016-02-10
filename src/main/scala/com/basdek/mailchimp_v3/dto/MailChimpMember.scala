@@ -1,6 +1,8 @@
 package com.basdek.mailchimp_v3.dto
 
-case class MailChimpMember_Location(latitude: Double, longtitude : Double)
+case class MailChimpMember_Location
+  (latitude: Double,
+   longtitude : Double)
 
 sealed case class MailChimpMember_Stats
   (avg_open_rate : Double,
@@ -32,8 +34,7 @@ case class MailChimpMember
    email_client : ReadOnlyField[String] = None,
    location: NonRequiredField[MailChimpMember_Location],
    last_note: ReadOnlyField[MailChimpMember_LastNote] = None,
-   list_id : ReadOnlyField[String] = None
-  ) extends MailChimpSuccess
+   list_id : ReadOnlyField[String] = None) extends MailChimpSuccess
 
 case class MailChimpMemberList
   (members : List[MailChimpMember],
