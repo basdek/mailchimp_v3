@@ -29,7 +29,7 @@ class ListHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
 
   "GetListOperation" should "be able to retrieve a list" in {
     val cfg = defaultCfg
-    val operation = new GetListOperation(cfg, "10870f2eb5")
+    val operation = new GetListOperation(cfg, testListId)
     val resultFuture : MailChimpResultFuture = operation.execute
 
     val result = Await.result(resultFuture, timeout)
