@@ -25,6 +25,43 @@ case class MailChimpList_Contact
    country: String,
    phone : NonRequiredField[String])
 
+case object MailChimpList_Contact {
+  /**
+    * This is a build method to create a Contact more easily from Java.
+    * @param company
+    * @param address1
+    * @param address2 //Nullable
+    * @param city
+    * @param state
+    * @param zip
+    * @param country
+    * @param phone //Nullable
+    * @return
+    */
+  def build
+    (company : String,
+     address1 : String,
+     address2: String,
+     city : String,
+     state: String,
+     zip : String,
+     country : String,
+     phone: String
+    ) : MailChimpList_Contact = {
+
+    MailChimpList_Contact(
+      company = company,
+      address1 = address1,
+      address2 = if (address2 == null) None else Option(address2),
+      city = city,
+      state = state,
+      zip = zip,
+      country = country,
+      phone = if (phone == null) None else Option(phone)
+    )
+  }
+}
+
 case class MailChimpList_CampaignDefaults
   (from_name : String,
    from_email : String,
@@ -49,6 +86,46 @@ case class MailChimpList
    visibility : NonRequiredField[String] = None, //@TODO: stricten up
    stats: ReadOnlyField[MailChimpList_Stats] = None
   ) extends MailChimpSuccess
+
+object MailChimpList {
+  /**
+    * This is a build method to create a MailChimpList instance more easily from Java.
+    *
+    * @param name
+    * @param contact
+    * @param permission_reminder
+    * @param use_archive_bar
+    * @param campaign_defaults
+    * @param notify_on_subscribe Nullable
+    * @param notify_on_unsubscribe Nullable
+    * @param email_type_option
+    * @param visibility Nullable
+    * @return
+    */
+  def build
+    (name : String,
+     contact: MailChimpList_Contact,
+     permission_reminder: String,
+     use_archive_bar : Boolean,
+     campaign_defaults: MailChimpList_CampaignDefaults,
+     notify_on_subscribe : String,
+     notify_on_unsubscribe : String,
+     email_type_option : Boolean,
+     visibility : String
+    ) : MailChimpList = {
+    MailChimpList(
+      name = name,
+      contact = contact,
+      permission_reminder = permission_reminder,
+      use_archive_bar = use_archive_bar,
+      campaign_defaults = campaign_defaults,
+      notify_on_subscribe = if (notify_on_subscribe == null) None else Option(notify_on_subscribe),
+      notify_on_unsubscribe = if(notify_on_unsubscribe == null) None else Option(notify_on_unsubscribe),
+      email_type_option = email_type_option,
+      visibility = if(visibility == null)  None else Option(visibility)
+    )
+  }
+}
 
 case class MailChimpListList
   (lists : List[MailChimpList],

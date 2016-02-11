@@ -59,6 +59,14 @@ owners.
 
 ### Changelog
 
+#### 0.2.0
+
+* Improving usability of the lib in Java:
+    * It is fairly complicated to instantiate a ```None``` in Java, which makes
+    the DTO case classes as they are right now pretty useless. Also, the default
+    arguments for ```ReadOnlyField```s are not respected in Java. Therefore added
+    constructor methods to the case classes that are more Java friendly.
+
 #### 0.1.0
 
 * Set up of basic project structure:
