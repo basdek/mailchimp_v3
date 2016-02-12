@@ -1,5 +1,7 @@
 package com.basdek.mailchimp_v3.integrationtests
 
+import java.util.UUID
+
 import com.basdek.mailchimp_v3.dto.MailChimpListMergeField
 import com.basdek.mailchimp_v3.helpers.ConfigLoader
 import com.basdek.mailchimp_v3.operations.lists.mergefields.{AddMergeFieldOperation, GetMergeFieldsOperation}
@@ -24,7 +26,7 @@ class MergeFieldHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
 
     val config = defaultCfg
     val data = MailChimpListMergeField(
-      tag = "TAG",
+      tag = s"${UUID.randomUUID()}TAG",
       name = "tag",
       _type = "text",
       required =  None,
