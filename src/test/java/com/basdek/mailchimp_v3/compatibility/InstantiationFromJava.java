@@ -1,9 +1,6 @@
 package com.basdek.mailchimp_v3.compatibility;
 
-import com.basdek.mailchimp_v3.dto.MailChimpList;
-import com.basdek.mailchimp_v3.dto.MailChimpList_CampaignDefaults;
-import com.basdek.mailchimp_v3.dto.MailChimpList_Contact;
-import com.basdek.mailchimp_v3.dto.MailChimpMember;
+import com.basdek.mailchimp_v3.dto.*;
 
 public class InstantiationFromJava {
 
@@ -26,6 +23,10 @@ public class InstantiationFromJava {
             true, new MailChimpList_CampaignDefaults("from", "from@basdek.com",
             "subject", "EN"), null, null, false, null
         );
+    }
+
+    public MailChimpInterestCategory instantiateMailChimpInterestCategory() {
+        return MailChimpInterestCategory.build("title", null, "hidden");
     }
 
 }
