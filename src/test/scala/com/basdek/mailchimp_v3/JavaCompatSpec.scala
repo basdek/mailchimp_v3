@@ -1,7 +1,7 @@
 package com.basdek.mailchimp_v3
 
 import com.basdek.mailchimp_v3.compatibility.InstantiationFromJava
-import com.basdek.mailchimp_v3.dto.{MailChimpList, MailChimpList_Contact, MailChimpMember}
+import com.basdek.mailchimp_v3.dto.{MailChimpListMergeField, MailChimpList, MailChimpList_Contact, MailChimpMember}
 import org.scalatest.{Matchers, FlatSpec}
 
 class JavaCompatSpec extends FlatSpec with Matchers {
@@ -21,6 +21,11 @@ class JavaCompatSpec extends FlatSpec with Matchers {
   it should "be instantiable via aux constructor in Java" in {
     val test = ifj.instantiateMailChimpList()
     test shouldBe an[MailChimpList]
+  }
+
+  "MailChimpListMergeFiled" should "be instantiable via aux constructor in Java" in {
+    val test = ifj.instantiateMailChimpListMergeField();
+    test shouldBe an[MailChimpListMergeField]
   }
 
 }
