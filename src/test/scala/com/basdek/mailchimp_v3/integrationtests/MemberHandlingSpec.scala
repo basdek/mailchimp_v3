@@ -27,6 +27,7 @@ class MemberHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
   }
 
   "AddMemberOperation" should "add a member to a list" in {
+
     val cfg = defaultCfg
     val data = MailChimpMember(
       email_address = s"albus.dumbledore${UUID.randomUUID}@basdek.com",
