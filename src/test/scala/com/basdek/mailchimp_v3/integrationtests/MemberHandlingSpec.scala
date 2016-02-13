@@ -2,10 +2,10 @@ package com.basdek.mailchimp_v3.integrationtests
 
 import java.util.UUID
 
-import com.basdek.mailchimp_v3.MailChimpResultFuture
+import com.basdek.mailchimp_v3.{SubscriberHash, MailChimpResultFuture}
 import com.basdek.mailchimp_v3.dto.{MailChimpMember, MailChimpMemberList}
 import com.basdek.mailchimp_v3.helpers.ConfigLoader
-import com.basdek.mailchimp_v3.operations.lists.members.{AddMemberOperation, GetMembersOperation}
+import com.basdek.mailchimp_v3.operations.lists.members.{GetMemberOperation, AddMemberOperation, GetMembersOperation}
 import org.scalatest.{Matchers, FlatSpec}
 
 import scala.concurrent.Await
@@ -45,5 +45,18 @@ class MemberHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
     val result = Await.result(resultFuture, timeout)
 
     result.isRight should equal (true)
+  }
+
+  "GetMemberOperation" should "retrieve a member" in {
+
+    val cfg = defaultCfg
+    val operation = new GetMemberOperation(
+      cfg, testListId, SubscriberHash.hash("basdek@basdek.com")
+    )
+    val result = operation.execute
+
+    val resultValue = Await.result(result, timeout)
+
+    resultValue.isRight should be (true)
   }
 }
