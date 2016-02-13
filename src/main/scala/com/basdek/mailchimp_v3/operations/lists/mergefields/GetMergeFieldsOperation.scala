@@ -7,6 +7,12 @@ import com.ning.http.client.Response
 import dispatch._, Defaults._
 import org.json4s._, native.JsonMethods._
 
+/**
+  * Implementation of the /lists/{listId}/merge-fields operation.
+  *
+  * @param cfg A Config instance.
+  * @param listId The listId from which you want to obtain the MergeFields.
+  */
 class GetMergeFieldsOperation(val cfg: Config, listId: String)
   extends Operation with SimpleAuthenticate {
 

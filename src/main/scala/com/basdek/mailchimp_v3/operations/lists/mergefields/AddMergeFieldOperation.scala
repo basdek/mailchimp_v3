@@ -7,7 +7,15 @@ import com.ning.http.client.Response
 import dispatch._, Defaults._
 import org.json4s._, native.JsonMethods._, native.Serialization.{write => jsonWrite}
 
-class AddMergeFieldOperation(val cfg: Config, listId: String, data: MailChimpListMergeField)
+/**
+  * Implementation of the POST /lists/{listId}/merge-fields operation.
+  *
+  * @param cfg A Config instance.
+  * @param listId The id of the list where you want to add a MergeField.
+  * @param data An instance of the MailChimpListMergeField DTO object.
+  */
+class AddMergeFieldOperation
+  (val cfg: Config, listId: String, data: MailChimpListMergeField)
   extends Operation with SimpleAuthenticate {
 
   private def transformer(res: Response) : MailChimpListMergeField = {

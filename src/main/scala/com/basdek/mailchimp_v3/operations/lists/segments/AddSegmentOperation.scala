@@ -9,7 +9,15 @@ import org.json4s._
 import org.json4s.native.JsonMethods._
 import org.json4s.native.Serialization.{write => jsonWrite}
 
-class AddSegmentOperation(val cfg: Config, listId: String, data: MailChimpListSegment)
+/**
+  * Implementation of the POST /lists/{listId}/segments operation.
+  *
+  * @param cfg A config instance.
+  * @param listId The id of the list you want to add a segment to.
+  * @param data A MailChimpListSegment DTO object.
+  */
+class AddSegmentOperation
+  (val cfg: Config, listId: String, data: MailChimpListSegment)
   extends Operation with SimpleAuthenticate {
 
   private def transformer(res : Response) : MailChimpListSegment = {

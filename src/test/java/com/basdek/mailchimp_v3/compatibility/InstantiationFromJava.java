@@ -2,6 +2,9 @@ package com.basdek.mailchimp_v3.compatibility;
 
 import com.basdek.mailchimp_v3.dto.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InstantiationFromJava {
 
     public MailChimpMember instantiateMailChimpMember() {
@@ -28,6 +31,27 @@ public class InstantiationFromJava {
     public MailChimpListMergeField instantiateMailChimpListMergeField() {
         return MailChimpListMergeField.build(
             "tag", "name", "text", null, null, null, null, null
+        );
+    }
+
+    public MailChimpListSegment_Options instantiateMailChimpListSegment_Options() {
+        List<MailChimpListSegment_Options_Condition> lst = new ArrayList<>();
+        lst.add(new TextMergeCondition("field", "op", "value"));
+
+        return MailChimpListSegment_Options.build(
+            "all", lst
+        );
+    }
+
+    public MailChimpListSegment instantiateMailChimpListSegment() {
+
+        List<MailChimpListSegment_Options_Condition> lst = new ArrayList<>();
+        lst.add(new TextMergeCondition("field", "op", "value"));
+
+        return MailChimpListSegment.build(
+            "name", new ArrayList<String>(), MailChimpListSegment_Options.build(
+                "all", lst
+            )
         );
     }
 

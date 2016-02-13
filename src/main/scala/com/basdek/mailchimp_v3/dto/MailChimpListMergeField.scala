@@ -50,6 +50,10 @@ object MailChimpListMergeField {
     )
   }
 
+  /**
+    * Custom serializer for MailChimpListMergeFields.
+    * The term 'type' is reserved in Scala, so we have to rework to _type.
+    */
   val serializer =
     FieldSerializer[MailChimpListMergeField](
       renameTo("_type", "type"),
