@@ -54,6 +54,22 @@ case class MailChimpListSegment_Options
 object MailChimpListSegment_Options {
 
   /**
+    * This is a build method to make the instantiation of MCLS_O_C more easily in java.
+    * @param _match
+    * @param conditions
+    * @return
+    */
+  def build
+  (_match: String,
+   conditions: java.util.List[MailChimpListSegment_Options_Condition]) :
+  MailChimpListSegment_Options = {
+    MailChimpListSegment_Options(
+      _match = _match,
+      conditions = conditions.asScala.toList
+    )
+  }
+
+  /**
     * Custom serializer for the MailChimpListSegment_Options.
     * The word 'match' is reserved in Scala, therefore we need to rework to _match.
     */
@@ -65,7 +81,7 @@ object MailChimpListSegment_Options {
 
 case class MailChimpListSegment
   (name : String,
-   static_segment: NonRequiredField[List[String]], //List of emailadresses
+   static_segment: NonRequiredField[List[String]], //List of email-addresses
    options: NonRequiredField[MailChimpListSegment_Options],
    member_count: ReadOnlyField[Int] = None,
    _type : ReadOnlyField[String] = None,
