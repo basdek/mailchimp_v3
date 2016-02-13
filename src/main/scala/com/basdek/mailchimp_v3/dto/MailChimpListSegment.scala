@@ -11,15 +11,24 @@ trait MailChimpListSegment_Options_Condition {
   def getConditionType : String
 }
 
+/**
+  * Custom serializer for all MailChimpListSegment_Options_Condition types.
+  *
+  * You need to write an entry for every new Condition type we want to add,
+  * luckily serialization is generic.
+  *
+  */
 object MailChimpListSegment_Options_ConditionSerializer
   extends CustomSerializer[MailChimpListSegment_Options_Condition](format => (
       {
+        //Deserialize TextMergeCondition.
         case JObject(JField("condition_type", JString("TextMerge")) ::
           JField("field", JString(f)) :: JField("op", JString(o)) ::
           JField("value", JString(v)) :: Nil) =>
           new TextMergeCondition(f, o, v)
       },
       {
+        //Serialization is generic.
         case obj : MailChimpListSegment_Options_Condition =>
           val a : JValue = Extraction.decompose(obj)(DefaultFormats)
           val b : JValue =  JField("condition_type", obj.getConditionType)
@@ -67,6 +76,7 @@ case class MailChimpListSegment
 object MailChimpListSegment {
 
   /**
+    * This is a build method to make the instantiation of ListSegments more easily in java.
     *
     * @param name
     * @param static_segment Nullable(1)
@@ -88,7 +98,8 @@ object MailChimpListSegment {
   }
 
   /**
-    * Custom serializer
+    * Custom serializer for MailChimpListSegment.
+    * The term 'type' is a reserved word in Scala, so we have to rework to _type.
     */
   val serializer = FieldSerializer[MailChimpListSegment](
     renameTo("_type", "type"),
