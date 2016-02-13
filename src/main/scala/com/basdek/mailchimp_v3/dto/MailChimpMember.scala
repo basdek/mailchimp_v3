@@ -1,5 +1,8 @@
 package com.basdek.mailchimp_v3.dto
 
+import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+
 case class MailChimpMember_Location
   (latitude: Double,
    longtitude : Double)
@@ -35,6 +38,44 @@ case class MailChimpMember
    location: NonRequiredField[MailChimpMember_Location],
    last_note: ReadOnlyField[MailChimpMember_LastNote] = None,
    list_id : ReadOnlyField[String] = None) extends MailChimpSuccess
+
+object MailChimpMember {
+
+  /**
+    * This is a build method to create a Member instance more easily from Java.
+    *
+    * @param email_address
+    * @param email_type Nullable
+    * @param status
+    * @param merge_fields Nullable
+    * @param interests Nullable
+    * @param language
+    * @param vip
+    * @param location Nullable
+    * @return
+    */
+  def build
+  (email_address : String,
+   email_type : String,
+   status: String,
+   merge_fields: java.util.Map[String, Object],
+   interests: java.util.Map[String, Object],
+   language: String,
+   vip: Boolean,
+   location: MailChimpMember_Location) : MailChimpMember = {
+
+    MailChimpMember(
+      email_address = email_address,
+      email_type = Option(email_type),
+      status = status,
+      merge_fields = if (merge_fields == null) None else Option(merge_fields.asScala.toMap),
+      interests = if (interests == null) None else Option(interests.asScala.toMap),
+      language = language,
+      vip = vip,
+      location = Option(location)
+    )
+  }
+}
 
 case class MailChimpMemberList
   (members : List[MailChimpMember],
