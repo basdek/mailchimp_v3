@@ -1,6 +1,6 @@
 package com.basdek.mailchimp_v3.operations
 
-import com.basdek.mailchimp_v3.dto.{MailChimpListMergeField, MailChimpSuccess, MailChimpError}
+import com.basdek.mailchimp_v3.dto._
 import com.basdek.mailchimp_v3.{Config, MailChimpResultFuture}
 import com.ning.http.client.Response
 import com.typesafe.scalalogging.LazyLogging
@@ -24,8 +24,12 @@ trait Operation extends LazyLogging {
   implicit val cfg : Config
 
 
-  implicit val formats : Formats = (DefaultFormats + MailChimpError.serializer +
-    MailChimpListMergeField.serializer)
+  implicit val formats : Formats =
+    (DefaultFormats +
+     MailChimpError.serializer +
+     MailChimpListSegment_Options.serializer +
+     MailChimpListSegment_Options_ConditionSerializer +
+     MailChimpListMergeField.serializer)
 
 
   /**
