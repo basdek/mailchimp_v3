@@ -5,7 +5,7 @@ import java.util.UUID
 import com.basdek.mailchimp_v3.{SubscriberHash, MailChimpResultFuture}
 import com.basdek.mailchimp_v3.dto.{MailChimpMember, MailChimpMemberList}
 import com.basdek.mailchimp_v3.helpers.ConfigLoader
-import com.basdek.mailchimp_v3.operations.lists.members.{GetMemberOperation, AddMemberOperation, GetMembersOperation}
+import com.basdek.mailchimp_v3.operations.lists.members.{EditMemberOperation, GetMemberOperation, AddMemberOperation, GetMembersOperation}
 import org.scalatest.{Matchers, FlatSpec}
 
 import scala.concurrent.Await
@@ -58,5 +58,42 @@ class MemberHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
     val resultValue = Await.result(result, timeout)
 
     resultValue.isRight should be (true)
+  }
+
+  //@TODO: this testscenario stinks.
+  "EditMemberOperation" should "be able to edit a member" in {
+
+    val cfg = defaultCfg
+
+    val member = Await.result(new GetMemberOperation(
+      cfg, testListId, SubscriberHash.hash("basdek@basdek.com")
+    ).execute, timeout)
+
+    if(member.isLeft) fail("Member not found")
+
+    val old = member.right.get.asInstanceOf[MailChimpMember]
+
+    val data = MailChimpMember(
+      email_address = old.email_address,
+      email_type = old.email_type,
+      status = old.status,
+      merge_fields = old.merge_fields,
+      interests =  old.interests,
+      language = old.language,
+      vip = !old.vip, //Switch that boolean...
+      location = old.location
+    )
+
+    val operation = new EditMemberOperation(
+      cfg, testListId, SubscriberHash.hash(old.email_address), data
+    )
+
+    val result = operation.execute
+
+    val resultValue = Await.result(result, timeout)
+
+    resultValue.isRight shouldBe true
+
+    resultValue.right.get.asInstanceOf[MailChimpMember].vip should not be old.vip
   }
 }
