@@ -33,7 +33,9 @@ Pull requests are welcomed and credit will be given where due.
 Please do include tests with your PR.
 
 * Please respect the 80 character (soft) limit (wherever reasonable.)
-* Identation is done by spaces (2 spaces in scala sourcecode.)
+* Identation is done by spaces
+    * Two (2) spaces in Scala sourcecode;
+    * Four (4) spaces in Java sourcecode.
 
 ## License
 Licensed under the generally permissive MIT license.
