@@ -73,14 +73,27 @@ class MemberHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
 
     val old = member.right.get.asInstanceOf[MailChimpMember]
 
+    def subsBool(in: Either[String, Boolean]) : Either[String, Boolean] = {
+        in match {
+        case Left(x) => x match {
+          case "subscribed" => Right(true)
+          case "unsubscribed" => Right(false)
+        }
+        case Right(x) => x match  {
+          case true => Left("subscribed")
+          case false => Left("unsubscribed")
+        }
+      }
+    }
+
     val data = MailChimpMember(
       email_address = old.email_address,
       email_type = old.email_type,
-      status = old.status,
+      status = subsBool(Right(!subsBool(Left(old.status)).right.get)).left.get, //Negate that
       merge_fields = old.merge_fields,
       interests =  old.interests,
       language = old.language,
-      vip = !old.vip, //Switch that boolean...
+      vip = old.vip,
       location = old.location
     )
 
@@ -94,6 +107,8 @@ class MemberHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
 
     resultValue.isRight shouldBe true
 
-    resultValue.right.get.asInstanceOf[MailChimpMember].vip should not be old.vip
+    val test = resultValue.right.get.asInstanceOf[MailChimpMember]
+
+    subsBool(Left(old.status)) should not equal subsBool(Left(test.status))
   }
 }
