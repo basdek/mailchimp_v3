@@ -30,6 +30,8 @@ class SegmentHandlingSpec extends FlatSpec with Matchers with ConfigLoader {
     val resultValue = Await.result(result, timeout)
 
     resultValue.isRight shouldBe true
+    resultValue.right.get.asInstanceOf[MailChimpListSegment]
+      .id.isDefined shouldBe true
   }
 
   "GetSegmentsOperation" should "work" in {

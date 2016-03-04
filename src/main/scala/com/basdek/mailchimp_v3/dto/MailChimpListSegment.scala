@@ -80,7 +80,8 @@ object MailChimpListSegment_Options {
 }
 
 case class MailChimpListSegment
-  (name : String,
+  (id : ReadOnlyField[Integer] = None,
+   name : String,
    static_segment: NonRequiredField[List[String]], //List of email-addresses
    options: NonRequiredField[MailChimpListSegment_Options],
    member_count: ReadOnlyField[Int] = None,

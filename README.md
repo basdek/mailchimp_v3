@@ -33,7 +33,9 @@ Pull requests are welcomed and credit will be given where due.
 Please do include tests with your PR.
 
 * Please respect the 80 character (soft) limit (wherever reasonable.)
-* Identation is done by spaces (2 spaces in scala sourcecode.)
+* Identation is done by spaces
+    * Two (2) spaces in Scala sourcecode;
+    * Four (4) spaces in Java sourcecode.
 
 ## License
 Licensed under the generally permissive MIT license.
@@ -57,7 +59,26 @@ provided by MailChimp is implemented. Future versions will support both.
 in this library's (source and documentation) are the property of their respective
 owners.
 
+### Various @TODOs and other things that leave something to be desired
+
+Througout the code there are various todos left, which will be acceptable until
+a Production release is issued (1.0.0)
+
+* There are quite a lot ```//@TODO stricten up.``` comments. These are to indicate
+that technically these fields do not accept a string, but are more like an Enum:
+they accept just a couple of values there. It is the ambition of this library to
+make those more rigid, typesafe.
+* Some testscenario's are really far from ideal. There is no definitive decission
+on whether we should mock the entire API of MailChimp or sacrifice on reproduceability
+and transparency of builds and work against the real api (which we are doing now.)
+    * Input on this subject is more than welcome.
+
 ### Changelog
+
+#### 0.3.0
+
+* Implemented the ```GET /lists/{list_id}/members/{subscriber-hash}``` operation
+* Implemented the ```PATCH /lists/{list_id}/members/{subscriber-hash}``` operation
 
 #### 0.2.0
 
